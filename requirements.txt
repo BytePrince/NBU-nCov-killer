@@ -1,0 +1,4 @@
+APScheduler>=3.6.3
+requests>=2.21.0
+
+
