@@ -13,15 +13,15 @@ from qcloudsms_py.httpclient import HTTPError
 t = time.time()
 t = str(int(round(time.time() * 1000)))
 
+#短信参数(模板参数因个人设定而异，此处仅供参考腾讯云短信接入使用方法)
+#appid = *********  # SDK AppID 以1400开头
+#appkey = "*********"
+#template_id = *********
+#sms_sign = "*******"
 
-appid = 000000  # SDK AppID 以1400开头
-appkey = "000000"
-template_id = 53**47
-sms_sign = "xiehestudio"
-
-ssender = SmsSingleSender(appid, appkey)
-params = ['123456789',datetime.datetime.now().strftime('%Y.%m.%d'),'成功']  # 当模板没有参数时，`params = []`
-phone_number = '13611111111'
+#ssender = SmsSingleSender(appid, appkey)
+#params = ['这里填写你的学号',datetime.datetime.now().strftime('%Y.%m.%d'),'成功']  # 当模板没有参数时，`params = []`
+#phone_number = '这里填写手机号码'
 
 
 
@@ -33,9 +33,9 @@ wid1 = ['123','456']
 wid3 = []
 wid_get = ''
 
-#固定信息
+#这里填写你的cookie信息
 userAgent = "Mozilla/5.0 (Linux; Android 10; TNY-AL00 Build/HUAWEITNY-AL00; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/79.0.3945.136 Mobile Safari/537.36 yiban/8.1.9 cpdaily/8.1.9 wisedu/8.1.9"
-Cookie = 'clientType=cpdaily_student; tenantId=nbu; sessionToken=********; acw_tc=********; MOD_AUTH_CAS=********'
+Cookie = 'clientType=cpdaily_student; tenantId=nbu; sessionToken=******; acw_tc=******; MOD_AUTH_CAS=******'
 
 
 header_01 = {
@@ -78,6 +78,7 @@ def getresult_1(formWid_get,collectWid_get):
         
 
 wid1 = getresult_1(formWid_get,collectWid_get)
+
 
 
 header_02 = {
@@ -174,9 +175,11 @@ wid_09 = str(int(wid3[1])+8)
 wid_10 = str(int(wid3[1])+9)
 
 itemWid_01 = str(int(wid3[0]))
-itemWid_02 = str(int(wid3[0])+3)
-itemWid_03 = str(int(wid3[0])+5)
-itemWid_04 = str(int(wid3[0])+7)
+itemWid_02 = str(int(wid3[0])+4)
+itemWid_03 = str(int(wid3[0])+7)
+itemWid_04 = str(int(wid3[0])+9)
+itemWid_05 = str(int(wid3[0])+11)
+
 
 
 def printall():
@@ -204,192 +207,228 @@ header_final ={
 }
 
 body_final ={
-	"formWid": wid1[0],
-	"collectWid": wid1[1],
-	"schoolTaskWid": schoolTaskWid_get,
-	"form": [{
-		"wid": wid_01,
-		"formWid": wid1[0],
-		"fieldType": 2,
-		"title": "今日健康打卡",
-		"description": "",
-		"minLength": 0,
-		"sort": "1",
-		"maxLength": '',
-		"isRequired": 1,
-		"imageCount": '',
-		"hasOtherItems": 0,
-		"colName": "field001",
-		"value": "健康",
-		"fieldItems": [{
-			"itemWid": itemWid_01,
-			"content": "健康",
-			"isOtherItems": 0,
-			"contendExtend": "",
-			"isSelected": ''
-		}]
-	}, {
-		"wid": wid_02,
-		"formWid": wid1[0],
-		"fieldType": 2,
-		"title": "现居住地是否变化？",
-		"description": "",
-		"minLength": 0,
-		"sort": "2",
-		"maxLength": '',
-		"isRequired": 1,
-		"imageCount": '',
-		"hasOtherItems": 0,
-		"colName": "field002",
-		"value": "无变化",
-		"fieldItems": [{
-			"itemWid": itemWid_02,
-			"content": "无变化",
-			"isOtherItems": 0,
-			"contendExtend": "",
-			"isSelected": ''
-		}]
-	}, {
-		"wid": wid_03,
-		"formWid": wid1[0],
-		"fieldType": 2,
-		"title": "今日是否从湖北省返回浙江？",
-		"description": "请大家仔细、如实填写，不要选错。",
-		"minLength": 0,
-		"sort": "3",
-		"maxLength": '',
-		"isRequired": 1,
-		"imageCount": '',
-		"hasOtherItems": 0,
-		"colName": "field003",
-		"value": "否",
-		"fieldItems": [{
-			"itemWid": itemWid_03,
-			"content": "否",
-			"isOtherItems": 0,
-			"contendExtend": "",
-			"isSelected": ''
-		}]
-	}, {
-		"wid": wid_04,
-		"formWid": wid1[0],
-		"fieldType": 2,
-		"title": "今日是否从温州、温岭、黄岩返回宁波？",
-		"description": "请大家仔细、如实填写，不要选错。",
-		"minLength": 0,
-		"sort": "4",
-		"maxLength": '',
-		"isRequired": 1,
-		"imageCount": '',
-		"hasOtherItems": 0,
-		"colName": "field004",
-		"value": "否",
-		"fieldItems": [{
-			"itemWid": itemWid_04,
-			"content": "否",
-			"isOtherItems": 0,
-			"contendExtend": "",
-			"isSelected": ''
-		}]
-	}, {
-		"wid": wid_05,
-		"formWid": wid1[0],
-		"fieldType": 1,
-		"title": "如有变化，请选择新的现居住地区域。（如无变化此项不用填写）",
-		"description": "",
-		"minLength": 1,
-		"sort": "5",
-		"maxLength": 300,
-		"isRequired": 0,
-		"imageCount": -2,
-		"hasOtherItems": 0,
-		"colName": "field005",
-		"value": "",
-		"fieldItems": [],
-		"area1": "",
-		"area2": "",
-		"area3": ""
-	}, {
-		"wid": wid_06,
-		"formWid": wid1[0],
-		"fieldType": 2,
-		"title": "目前状况（如有异常状况请填写，无异常此项不用填写）",
-		"description": "异常状况请填写：发热、咳嗽等具体症状",
-		"minLength": 0,
-		"sort": "6",
-		"maxLength": '',
-		"isRequired": 0,
-		"imageCount": '',
-		"hasOtherItems": 1,
-		"colName": "field006",
-		"value": "",
-		"fieldItems": []
-	}, {
-		"wid": wid_07,
-		"formWid": wid1[0],
-		"fieldType": 2,
-		"title": "已采取措施（如有异常状况请填写，无异常此项不用填写）",
-		"description": "",
-		"minLength": 0,
-		"sort": "7",
-		"maxLength": '',
-		"isRequired": 0,
-		"imageCount": '',
-		"hasOtherItems": 0,
-		"colName": "field007",
-		"value": "",
-		"fieldItems": []
-	}, {
-		"wid": wid_08,
-		"formWid": wid1[0],
-		"fieldType": 2,
-		"title": "此前集中隔离的，今日是否已解除隔离？（如没有集中隔离的，此项不用填写）",
-		"description": "",
-		"minLength": 0,
-		"sort": "8",
-		"maxLength": '',
-		"isRequired": 0,
-		"imageCount": '',
-		"hasOtherItems": 0,
-		"colName": "field008",
-		"value": "",
-		"fieldItems": []
-	}, {
-		"wid": wid_09,
-		"formWid": wid1[0],
-		"fieldType": 2,
-		"title": "是否确诊新型冠状肺炎（如有异常状况请填写，无异常此项不用填写）",
-		"description": "",
-		"minLength": 0,
-		"sort": "9",
-		"maxLength": '',
-		"isRequired": 0,
-		"imageCount": '',
-		"hasOtherItems": 0,
-		"colName": "field009",
-		"value": "",
-		"fieldItems": []
-	}, {
-		"wid": wid_10,
-		"formWid": wid1[0],
-		"fieldType": 2,
-		"title": "是否上报所在社区（如有异常状况请填写，无异常此项不用填写）",
-		"description": "",
-		"minLength": 0,
-		"sort": "10",
-		"maxLength": '',
-		"isRequired": 0,
-		"imageCount": '',
-		"hasOtherItems": 0,
-		"colName": "field010",
-		"value": "",
-		"fieldItems": []
-	}]
+    "formWid": wid1[0],
+    "collectWid": wid1[1],
+    "schoolTaskWid": schoolTaskWid_get,
+    "form":[
+        {
+            "wid": wid_01,
+            "formWid": wid1[0],
+            "fieldType":2,
+            "title":"今日你的甬行码是什么颜色？",
+            "description":"其他选项请注明具体情况哦。蓝色的同学请你看看二维码颜色",
+            "minLength":0,
+            "sort":"1",
+            "maxLength": '',
+            "isRequired":1,
+            "imageCount": '',
+            "hasOtherItems":1,
+            "colName":"field001",
+            "value":"绿色",
+            "fieldItems":[
+                {
+                    "itemWid":itemWid_01,
+                    "content":"绿色",
+                    "isOtherItems":0,
+                    "contendExtend":"",
+                    "isSelected": ''
+                }
+            ]
+        },
+        {
+            "wid": wid_02,
+            "formWid": wid1[0],
+            "fieldType":2,
+            "title":"今日健康打卡",
+            "description":"",
+            "minLength":0,
+            "sort":"2",
+            "maxLength": '',
+            "isRequired":1,
+            "imageCount": '',
+            "hasOtherItems":0,
+            "colName":"field002",
+            "value":"健康",
+            "fieldItems":[
+                {
+                    "itemWid":itemWid_02,
+                    "content":"健康",
+                    "isOtherItems":0,
+                    "contendExtend":"",
+                    "isSelected": ''
+                }
+            ]
+        },
+        {
+            "wid": wid_03,
+            "formWid": wid1[0],
+            "fieldType":2,
+            "title":"相对昨日，现居住地是否变化？",
+            "description":"",
+            "minLength":0,
+            "sort":"3",
+            "maxLength": '',
+            "isRequired":1,
+            "imageCount": '',
+            "hasOtherItems":0,
+            "colName":"field003",
+            "value":"无变化",
+            "fieldItems":[
+                {
+                    "itemWid":itemWid_03,
+                    "content":"无变化",
+                    "isOtherItems":0,
+                    "contendExtend":"",
+                    "isSelected": ''
+                }
+            ]
+        },
+        {
+            "wid": wid_04,
+            "formWid": wid1[0],
+            "fieldType":2,
+            "title":"今日是否从湖北省返回浙江？",
+            "description":"请大家仔细、如实填写，不要选错。",
+            "minLength":0,
+            "sort":"4",
+            "maxLength": '',
+            "isRequired":1,
+            "imageCount": '',
+            "hasOtherItems":0,
+            "colName":"field004",
+            "value":"否",
+            "fieldItems":[
+                {
+                    "itemWid":itemWid_04,
+                    "content":"否",
+                    "isOtherItems":0,
+                    "contendExtend":"",
+                    "isSelected": ''
+                }
+            ]
+        },
+        {
+            "wid": wid_05,
+            "formWid": wid1[0],
+            "fieldType":2,
+            "title":"今日是否从温州、温岭、黄岩返回宁波？",
+            "description":"请大家仔细、如实填写，不要选错。",
+            "minLength":0,
+            "sort":"5",
+            "maxLength": '',
+            "isRequired":1,
+            "imageCount": '',
+            "hasOtherItems":0,
+            "colName":"field005",
+            "value":"否",
+            "fieldItems":[
+                {
+                    "itemWid":itemWid_05,
+                    "content":"否",
+                    "isOtherItems":0,
+                    "contendExtend":"",
+                    "isSelected": ''
+                }
+            ]
+        },
+        {
+            "wid": wid_06,
+            "formWid": wid1[0],
+            "fieldType":1,
+            "title":"【没有变化不用填】如有变化，请选择新的现居住地区域。",
+            "description":"",
+            "minLength":1,
+            "sort":"6",
+            "maxLength":300,
+            "isRequired":0,
+            "imageCount":-2,
+            "hasOtherItems":0,
+            "colName":"field006",
+            "value":"",
+            "fieldItems":[
+
+            ],
+            "area1":"",
+            "area2":"",
+            "area3":""
+        },
+        {
+            "wid": wid_07,
+            "formWid": wid1[0],
+            "fieldType":2,
+            "title":"【没有异常不用填】目前异常状况是？",
+            "description":"异常状况请填写：发热、咳嗽等具体症状",
+            "minLength":0,
+            "sort":"7",
+            "maxLength": '',
+            "isRequired":0,
+            "imageCount": '',
+            "hasOtherItems":1,
+            "colName":"field007",
+            "value":"",
+            "fieldItems":[
+                
+            ]
+        },
+        {
+            "wid": wid_08,
+            "formWid": wid1[0],
+            "fieldType":2,
+            "title":"【无情况的不用填】此前集中隔离的，今日是否已解除隔离？",
+            "description":"",
+            "minLength":0,
+            "sort":"8",
+            "maxLength": '',
+            "isRequired":0,
+            "imageCount": '',
+            "hasOtherItems":0,
+            "colName":"field008",
+            "value":"",
+            "fieldItems":[
+                
+            ]
+        },
+        {
+            "wid": wid_09,
+            "formWid": wid1[0],
+            "fieldType":2,
+            "title":"【没有异常不用填】已采取的措施是？",
+            "description":"",
+            "minLength":0,
+            "sort":"9",
+            "maxLength": '',
+            "isRequired":0,
+            "imageCount": '',
+            "hasOtherItems":0,
+            "colName":"field009",
+            "value":"",
+            "fieldItems":[
+                
+            ]
+        },
+        {
+            "wid": wid_10,
+            "formWid": wid1[0],
+            "fieldType":2,
+            "title":"【没有异常不用填】是否确诊新型冠状肺炎？",
+            "description":"",
+            "minLength":0,
+            "sort":"10",
+            "maxLength": '',
+            "isRequired":0,
+            "imageCount": '',
+            "hasOtherItems":0,
+            "colName":"field010",
+            "value":"",
+            "fieldItems":[
+                
+            ]
+        }
+    ]
 }
 
 
 def postForm():
-    # 获得打卡的结果
     print ("开始健康打卡~")
     print ("正在返回您的打卡结果，请稍候...")
     postUrl = "https://nbu.cpdaily.com/wec-counselor-collector-apps/stu/collector/submitForm"
@@ -399,7 +438,7 @@ def postForm():
 
 def runkiller():
     getresult_1(formWid_get,collectWid_get)
-    getresult_2(schoolTaskWid_get)  
+    getresult_2(schoolTaskWid_get)   
     getresult_3(itemWid_get,wid_get)
     printall()
     postForm()
@@ -413,21 +452,22 @@ def keepalive():
 
 
 
+#腾讯云短信调用方法
+# def sendmessage():
+#     try:
+#      result = ssender.send_with_param(86, phone_number,
+#       template_id, params, sign=sms_sign, extend="", ext="") 
+#     except HTTPError as e:
+#       print(e)
+#     except Exception as e:
+#       print(e)
+#       print(result)    	
 
-def sendmessage():
-    try:
-     result = ssender.send_with_param(86, phone_number,
-      template_id, params, sign=sms_sign, extend="", ext="") 
-    except HTTPError as e:
-      print(e)
-    except Exception as e:
-      print(e)
-      print(result)    	
-
-
-if __name__ == "__main__":  
-    runkiller()#提交打卡表单
-    sendmessage()#发送短信通知
+#定时提交表单
+if __name__ == "__main__":
+    runkiller()
+    #短信通知功能，可选
+    #sendmessage()
  
 
 
