@@ -1,27 +1,55 @@
 # -*- coding: utf-8 -*-
 import requests
+import sys
 import time
 import json
 import random
-from apscheduler.schedulers.blocking import BlockingScheduler
+import smtplib
 import datetime
 from time import strftime, localtime
 from qcloudsms_py import SmsSingleSender
 from qcloudsms_py.httpclient import HTTPError
+from email.header import Header
+from email.mime.text import MIMEText
+from apscheduler.schedulers.blocking import BlockingScheduler
+
+
+
+
+#发送邮件功能1
+def sendEmail_for_success():
+    message = MIMEText("尊敬的主人您好，今天的打卡已经为您完成！", 'plain', 'utf-8')  # 内容, 格式, 编码
+    message['From'] = "{}".format("xxx@xxx.com")
+    message['To'] = "xxx@xxx.cn"
+    message['Subject'] = "打卡成功提醒"
+ 
+    try:
+        smtpObj = smtplib.SMTP_SSL("smtp.163.com", 465)  # 启用SSL发信, 端口一般是465
+        smtpObj.login("zzzain46", "AAAAAAAAAAAA")  # 登录验证
+        smtpObj.sendmail("xxx@xxx.com","xxx@xxx.cn", message.as_string())  # 发送
+        print("mail has been send successfully.")
+    except smtplib.SMTPException as e:
+        print(e)
+#发送邮件功能2
+def sendEmail_for_failure():
+    message = MIMEText("尊敬的主人您好，服务异常，请您上线检查！", 'plain', 'utf-8')  # 内容, 格式, 编码
+    message['From'] = "{}".format("xxx@xxx.com")
+    message['To'] = "xxx@xxx.cn"
+    message['Subject'] = "服务异常警告"
+ 
+    try:
+        smtpObj = smtplib.SMTP_SSL("smtp.163.com", 465)  # 启用SSL发信, 端口一般是465
+        smtpObj.login("zzzain46", "AAAAAAAAAAAA")  # 登录验证
+        smtpObj.sendmail("xxx@xxx.com","xxx@xxx.cn", message.as_string())  # 发送
+        print("mail has been send successfully.")
+    except smtplib.SMTPException as e:
+        print(e)
+
+
 
 
 t = time.time()
 t = str(int(round(time.time() * 1000)))
-
-#短信参数(模板参数因个人设定而异，此处仅供参考腾讯云短信接入使用方法)
-#appid = *********  # SDK AppID 以1400开头
-#appkey = "*********"
-#template_id = *********
-#sms_sign = "*******"
-
-#ssender = SmsSingleSender(appid, appkey)
-#params = ['这里填写你的学号',datetime.datetime.now().strftime('%Y.%m.%d'),'成功']  # 当模板没有参数时，`params = []`
-#phone_number = '这里填写手机号码'
 
 
 
@@ -33,10 +61,9 @@ wid1 = ['123','456']
 wid3 = []
 wid_get = ''
 
-#这里填写你的cookie信息
-userAgent = "Mozilla/5.0 (Linux; Android 10; TNY-AL00 Build/HUAWEITNY-AL00; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/79.0.3945.136 Mobile Safari/537.36 yiban/8.1.9 cpdaily/8.1.9 wisedu/8.1.9"
-Cookie = 'clientType=cpdaily_student; tenantId=nbu; sessionToken=******; acw_tc=******; MOD_AUTH_CAS=******'
 
+userAgent = "Mozilla/5.0 (Linux; Android 10; TNY-AL00 Build/HUAWEITNY-AL00; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/79.0.3945.136 Mobile Safari/537.36 yiban/8.1.9 cpdaily/8.1.9 wisedu/8.1.9"
+Cookie = 'clientType=cpdaily_student; tenantId=nbu; sessionToken=; acw_tc=; MOD_AUTH_CAS='
 
 header_01 = {
     'Connection': 'keep-alive',
@@ -67,6 +94,7 @@ def getresult_1(formWid_get,collectWid_get):
     if (responseRes.status_code == 200):
         print('服务器响应正常！')
         try:
+            #提取formWid和collectWid
             formWid_get = dict_text['datas']['rows'][0]['formWid'] 
             collectWid_get = dict_text['datas']['rows'][0]['wid']      
             wid1 = [formWid_get,collectWid_get]
@@ -175,10 +203,10 @@ wid_09 = str(int(wid3[1])+8)
 wid_10 = str(int(wid3[1])+9)
 
 itemWid_01 = str(int(wid3[0]))
-itemWid_02 = str(int(wid3[0])+4)
-itemWid_03 = str(int(wid3[0])+7)
-itemWid_04 = str(int(wid3[0])+9)
-itemWid_05 = str(int(wid3[0])+11)
+itemWid_02 = str(int(wid3[0])+5)
+itemWid_03 = str(int(wid3[0])+8)
+itemWid_04 = str(int(wid3[0])+10)
+itemWid_05 = str(int(wid3[0])+12)
 
 
 
@@ -219,19 +247,19 @@ body_final ={
             "description":"其他选项请注明具体情况哦。蓝色的同学请你看看二维码颜色",
             "minLength":0,
             "sort":"1",
-            "maxLength": '',
+            "maxLength":"",
             "isRequired":1,
-            "imageCount": '',
+            "imageCount":"",
             "hasOtherItems":1,
             "colName":"field001",
-            "value":"绿色",
+            "value":"",
             "fieldItems":[
                 {
                     "itemWid":itemWid_01,
                     "content":"绿色",
                     "isOtherItems":0,
                     "contendExtend":"",
-                    "isSelected": ''
+                    "isSelected":1
                 }
             ]
         },
@@ -243,19 +271,19 @@ body_final ={
             "description":"",
             "minLength":0,
             "sort":"2",
-            "maxLength": '',
+            "maxLength":"",
             "isRequired":1,
-            "imageCount": '',
+            "imageCount":"",
             "hasOtherItems":0,
             "colName":"field002",
-            "value":"健康",
+            "value":"",
             "fieldItems":[
                 {
                     "itemWid":itemWid_02,
                     "content":"健康",
                     "isOtherItems":0,
                     "contendExtend":"",
-                    "isSelected": ''
+                    "isSelected":1
                 }
             ]
         },
@@ -267,19 +295,19 @@ body_final ={
             "description":"",
             "minLength":0,
             "sort":"3",
-            "maxLength": '',
+            "maxLength":"",
             "isRequired":1,
-            "imageCount": '',
+            "imageCount":"",
             "hasOtherItems":0,
             "colName":"field003",
-            "value":"无变化",
+            "value":"",
             "fieldItems":[
                 {
                     "itemWid":itemWid_03,
                     "content":"无变化",
                     "isOtherItems":0,
                     "contendExtend":"",
-                    "isSelected": ''
+                    "isSelected":1
                 }
             ]
         },
@@ -291,19 +319,19 @@ body_final ={
             "description":"请大家仔细、如实填写，不要选错。",
             "minLength":0,
             "sort":"4",
-            "maxLength": '',
+            "maxLength":"",
             "isRequired":1,
-            "imageCount": '',
+            "imageCount":"",
             "hasOtherItems":0,
             "colName":"field004",
-            "value":"否",
+            "value":"",
             "fieldItems":[
                 {
                     "itemWid":itemWid_04,
                     "content":"否",
                     "isOtherItems":0,
                     "contendExtend":"",
-                    "isSelected": ''
+                    "isSelected":1
                 }
             ]
         },
@@ -315,19 +343,19 @@ body_final ={
             "description":"请大家仔细、如实填写，不要选错。",
             "minLength":0,
             "sort":"5",
-            "maxLength": '',
+            "maxLength":"",
             "isRequired":1,
-            "imageCount": '',
+            "imageCount":"",
             "hasOtherItems":0,
             "colName":"field005",
-            "value":"否",
+            "value":"",
             "fieldItems":[
                 {
                     "itemWid":itemWid_05,
                     "content":"否",
                     "isOtherItems":0,
                     "contendExtend":"",
-                    "isSelected": ''
+                    "isSelected":1
                 }
             ]
         },
@@ -346,11 +374,8 @@ body_final ={
             "colName":"field006",
             "value":"",
             "fieldItems":[
-
-            ],
-            "area1":"",
-            "area2":"",
-            "area3":""
+    
+            ]
         },
         {
             "wid": wid_07,
@@ -360,14 +385,13 @@ body_final ={
             "description":"异常状况请填写：发热、咳嗽等具体症状",
             "minLength":0,
             "sort":"7",
-            "maxLength": '',
+            "maxLength":"",
             "isRequired":0,
-            "imageCount": '',
+            "imageCount":"",
             "hasOtherItems":1,
             "colName":"field007",
             "value":"",
             "fieldItems":[
-                
             ]
         },
         {
@@ -378,14 +402,13 @@ body_final ={
             "description":"",
             "minLength":0,
             "sort":"8",
-            "maxLength": '',
+            "maxLength":"",
             "isRequired":0,
-            "imageCount": '',
+            "imageCount":"",
             "hasOtherItems":0,
             "colName":"field008",
             "value":"",
             "fieldItems":[
-                
             ]
         },
         {
@@ -396,14 +419,13 @@ body_final ={
             "description":"",
             "minLength":0,
             "sort":"9",
-            "maxLength": '',
+            "maxLength":"",
             "isRequired":0,
-            "imageCount": '',
+            "imageCount":"",
             "hasOtherItems":0,
             "colName":"field009",
             "value":"",
             "fieldItems":[
-                
             ]
         },
         {
@@ -414,18 +436,17 @@ body_final ={
             "description":"",
             "minLength":0,
             "sort":"10",
-            "maxLength": '',
+            "maxLength":"",
             "isRequired":0,
-            "imageCount": '',
+            "imageCount":"",
             "hasOtherItems":0,
             "colName":"field010",
             "value":"",
             "fieldItems":[
-                
             ]
         }
     ]
-}
+} 
 
 
 def postForm():
@@ -435,14 +456,22 @@ def postForm():
     responseRes = requests.post(postUrl, headers = header_final,data=json.dumps(body_final),verify = False)
     print(f"statusCode = {responseRes.status_code}")
     print(f"text = {responseRes.text}")
+    dict_text2 = json.loads(responseRes.text)
+    code = dict_text2['code']
+    if code == '0':
+        print('打卡成功！')
+        sendEmail_for_success()
+    else:
+        print('打卡失败！')
+        sendEmail_for_failure()
+
 
 def runkiller():
     getresult_1(formWid_get,collectWid_get)
-    getresult_2(schoolTaskWid_get)   
+    getresult_2(schoolTaskWid_get) 
     getresult_3(itemWid_get,wid_get)
     printall()
     postForm()
-    print(body_final)
 
 
 def keepalive():
@@ -452,22 +481,21 @@ def keepalive():
 
 
 
-#腾讯云短信调用方法
-# def sendmessage():
-#     try:
-#      result = ssender.send_with_param(86, phone_number,
-#       template_id, params, sign=sms_sign, extend="", ext="") 
-#     except HTTPError as e:
-#       print(e)
-#     except Exception as e:
-#       print(e)
-#       print(result)    	
 
-#定时提交表单
+def sendmessage():
+    try:
+     result = ssender.send_with_param(86, phone_number,
+      template_id, params, sign=sms_sign, extend="", ext="") 
+    except HTTPError as e:
+      print(e)
+    except Exception as e:
+      print(e)
+      print(result)    	
+
+
 if __name__ == "__main__":
     runkiller()
-    #短信通知功能，可选
-    #sendmessage()
+    
  
 
 
