@@ -7,8 +7,6 @@ import random
 import smtplib
 import datetime
 from time import strftime, localtime
-from qcloudsms_py import SmsSingleSender
-from qcloudsms_py.httpclient import HTTPError
 from email.header import Header
 from email.mime.text import MIMEText
 from apscheduler.schedulers.blocking import BlockingScheduler
