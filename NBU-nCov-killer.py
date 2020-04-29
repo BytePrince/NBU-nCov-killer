@@ -16,31 +16,31 @@ from apscheduler.schedulers.blocking import BlockingScheduler
 
 
 
-#发送邮件功能1
+
 def sendEmail_for_success():
-    message = MIMEText("尊敬的主人您好，今天的打卡已经为您完成！", 'plain', 'utf-8')  # 内容, 格式, 编码
+    message = MIMEText("尊敬的主人您好，今天的打卡已经为您完成！", 'plain', 'utf-8')  
     message['From'] = "{}".format("xxx@xxx.com")
     message['To'] = "xxx@xxx.cn"
     message['Subject'] = "打卡成功提醒"
  
     try:
-        smtpObj = smtplib.SMTP_SSL("smtp.163.com", 465)  # 启用SSL发信, 端口一般是465
-        smtpObj.login("zzzain46", "AAAAAAAAAAAA")  # 登录验证
-        smtpObj.sendmail("xxx@xxx.com","xxx@xxx.cn", message.as_string())  # 发送
+        smtpObj = smtplib.SMTP_SSL("smtp.163.com", 465)  
+        smtpObj.login("zzzain46", "AAAAAAAAAAAA")  
+        smtpObj.sendmail("xxx@xxx.com","xxx@xxx.cn", message.as_string())  
         print("mail has been send successfully.")
     except smtplib.SMTPException as e:
         print(e)
-#发送邮件功能2
+
 def sendEmail_for_failure():
-    message = MIMEText("尊敬的主人您好，服务异常，请您上线检查！", 'plain', 'utf-8')  # 内容, 格式, 编码
+    message = MIMEText("尊敬的主人您好，服务异常，请您上线检查！", 'plain', 'utf-8')  
     message['From'] = "{}".format("xxx@xxx.com")
     message['To'] = "xxx@xxx.cn"
     message['Subject'] = "服务异常警告"
  
     try:
-        smtpObj = smtplib.SMTP_SSL("smtp.163.com", 465)  # 启用SSL发信, 端口一般是465
-        smtpObj.login("zzzain46", "AAAAAAAAAAAA")  # 登录验证
-        smtpObj.sendmail("xxx@xxx.com","xxx@xxx.cn", message.as_string())  # 发送
+        smtpObj = smtplib.SMTP_SSL("smtp.163.com", 465)  
+        smtpObj.login("zzzain46", "AAAAAAAAAAAA")  
+        smtpObj.sendmail("xxx@xxx.com","xxx@xxx.cn", message.as_string())  
         print("mail has been send successfully.")
     except smtplib.SMTPException as e:
         print(e)
@@ -94,7 +94,6 @@ def getresult_1(formWid_get,collectWid_get):
     if (responseRes.status_code == 200):
         print('服务器响应正常！')
         try:
-            #提取formWid和collectWid
             formWid_get = dict_text['datas']['rows'][0]['formWid'] 
             collectWid_get = dict_text['datas']['rows'][0]['wid']      
             wid1 = [formWid_get,collectWid_get]
