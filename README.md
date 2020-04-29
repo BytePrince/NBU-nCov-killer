@@ -3,7 +3,7 @@
 宁大nCov肺炎健康打卡定时自动脚本
 
  - ~~默认为每天21:30自动打卡~~ 删去自动定时任务功能，因服务器类型不同，请自行添加代码执行的定时任务。参看**USAGE**的第6点。
- - 默认每次提交的内容为“身体健康且为接触疫情敏感区域和人群”
+ - 默认每次提交的内容为“身体健康且未接触疫情敏感区域和人群”
 
 > 本工具只用于技术交流和学习，如有身体不适或健康码发生变色，请如实汇报，以便学校进行统计。
 
@@ -71,7 +71,7 @@
 
 ## LICENSE
 
-Copyright (c) 2020 zzzain46.
+Copyright (c) 2020 [PwnerZhang](https://pwner.cn).
 
 Licensed under the [MIT License](https://github.com/Tishacy/ZJU-nCov-Hitcarder/blob/master/LICENSE)
 
