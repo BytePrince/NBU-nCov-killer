@@ -189,21 +189,8 @@ wid3 = getresult_3(itemWid_get,wid_get)
 
 
 wid_01 = str(int(wid3[1]))
-wid_02 = str(int(wid3[1])+1)
-wid_03 = str(int(wid3[1])+2)
-wid_04 = str(int(wid3[1])+3)
-wid_05 = str(int(wid3[1])+4)
-wid_06 = str(int(wid3[1])+5)
-wid_07 = str(int(wid3[1])+6)
-wid_08 = str(int(wid3[1])+7)
-wid_09 = str(int(wid3[1])+8)
-wid_10 = str(int(wid3[1])+9)
-
 itemWid_01 = str(int(wid3[0]))
-itemWid_02 = str(int(wid3[0])+5)
-itemWid_03 = str(int(wid3[0])+8)
-itemWid_04 = str(int(wid3[0])+10)
-itemWid_05 = str(int(wid3[0])+12)
+
 
 
 
@@ -239,207 +226,25 @@ body_final ={
         {
             "wid": wid_01,
             "formWid": wid1[0],
-            "fieldType":2,
-            "title":"今日你的甬行码是什么颜色？",
-            "description":"其他选项请注明具体情况哦。蓝色的同学请你看看二维码颜色",
-            "minLength":0,
-            "sort":"1",
-            "maxLength":"",
-            "isRequired":1,
-            "imageCount":"",
-            "hasOtherItems":1,
-            "colName":"field001",
-            "value":"",
-            "fieldItems":[
+            "fieldType": 2,
+            "title": "较上次打卡，您的健康状况、甬行码、确诊情况、旅居史和接触史等信息，是否有变化？",
+            "description": "",
+            "minLength": 0,
+            "sort": "1",
+            "maxLength": "",
+            "isRequired": 1,
+            "imageCount": "",
+            "hasOtherItems": 0,
+            "colName": "field001",
+            "value": "",
+            "fieldItems": [
                 {
-                    "itemWid":itemWid_01,
-                    "content":"绿色",
-                    "isOtherItems":0,
-                    "contendExtend":"",
-                    "isSelected":1
+                    "itemWid": itemWid_01,
+                    "content": "A.以上均无变化",
+                    "isOtherItems": 0,
+                    "contendExtend": "",
+                    "isSelected": 1
                 }
-            ]
-        },
-        {
-            "wid": wid_02,
-            "formWid": wid1[0],
-            "fieldType":2,
-            "title":"今日健康打卡",
-            "description":"",
-            "minLength":0,
-            "sort":"2",
-            "maxLength":"",
-            "isRequired":1,
-            "imageCount":"",
-            "hasOtherItems":0,
-            "colName":"field002",
-            "value":"",
-            "fieldItems":[
-                {
-                    "itemWid":itemWid_02,
-                    "content":"健康",
-                    "isOtherItems":0,
-                    "contendExtend":"",
-                    "isSelected":1
-                }
-            ]
-        },
-        {
-            "wid": wid_03,
-            "formWid": wid1[0],
-            "fieldType":2,
-            "title":"相对昨日，现居住地是否变化？",
-            "description":"",
-            "minLength":0,
-            "sort":"3",
-            "maxLength":"",
-            "isRequired":1,
-            "imageCount":"",
-            "hasOtherItems":0,
-            "colName":"field003",
-            "value":"",
-            "fieldItems":[
-                {
-                    "itemWid":itemWid_03,
-                    "content":"无变化",
-                    "isOtherItems":0,
-                    "contendExtend":"",
-                    "isSelected":1
-                }
-            ]
-        },
-        {
-            "wid": wid_04,
-            "formWid": wid1[0],
-            "fieldType":2,
-            "title":"今日是否从湖北省返回浙江？",
-            "description":"请大家仔细、如实填写，不要选错。",
-            "minLength":0,
-            "sort":"4",
-            "maxLength":"",
-            "isRequired":1,
-            "imageCount":"",
-            "hasOtherItems":0,
-            "colName":"field004",
-            "value":"",
-            "fieldItems":[
-                {
-                    "itemWid":itemWid_04,
-                    "content":"否",
-                    "isOtherItems":0,
-                    "contendExtend":"",
-                    "isSelected":1
-                }
-            ]
-        },
-        {
-            "wid": wid_05,
-            "formWid": wid1[0],
-            "fieldType":2,
-            "title":"今日是否从温州、温岭、黄岩返回宁波？",
-            "description":"请大家仔细、如实填写，不要选错。",
-            "minLength":0,
-            "sort":"5",
-            "maxLength":"",
-            "isRequired":1,
-            "imageCount":"",
-            "hasOtherItems":0,
-            "colName":"field005",
-            "value":"",
-            "fieldItems":[
-                {
-                    "itemWid":itemWid_05,
-                    "content":"否",
-                    "isOtherItems":0,
-                    "contendExtend":"",
-                    "isSelected":1
-                }
-            ]
-        },
-        {
-            "wid": wid_06,
-            "formWid": wid1[0],
-            "fieldType":1,
-            "title":"【没有变化不用填】如有变化，请选择新的现居住地区域。",
-            "description":"",
-            "minLength":1,
-            "sort":"6",
-            "maxLength":300,
-            "isRequired":0,
-            "imageCount":-2,
-            "hasOtherItems":0,
-            "colName":"field006",
-            "value":"",
-            "fieldItems":[
-    
-            ]
-        },
-        {
-            "wid": wid_07,
-            "formWid": wid1[0],
-            "fieldType":2,
-            "title":"【没有异常不用填】目前异常状况是？",
-            "description":"异常状况请填写：发热、咳嗽等具体症状",
-            "minLength":0,
-            "sort":"7",
-            "maxLength":"",
-            "isRequired":0,
-            "imageCount":"",
-            "hasOtherItems":1,
-            "colName":"field007",
-            "value":"",
-            "fieldItems":[
-            ]
-        },
-        {
-            "wid": wid_08,
-            "formWid": wid1[0],
-            "fieldType":2,
-            "title":"【无情况的不用填】此前集中隔离的，今日是否已解除隔离？",
-            "description":"",
-            "minLength":0,
-            "sort":"8",
-            "maxLength":"",
-            "isRequired":0,
-            "imageCount":"",
-            "hasOtherItems":0,
-            "colName":"field008",
-            "value":"",
-            "fieldItems":[
-            ]
-        },
-        {
-            "wid": wid_09,
-            "formWid": wid1[0],
-            "fieldType":2,
-            "title":"【没有异常不用填】已采取的措施是？",
-            "description":"",
-            "minLength":0,
-            "sort":"9",
-            "maxLength":"",
-            "isRequired":0,
-            "imageCount":"",
-            "hasOtherItems":0,
-            "colName":"field009",
-            "value":"",
-            "fieldItems":[
-            ]
-        },
-        {
-            "wid": wid_10,
-            "formWid": wid1[0],
-            "fieldType":2,
-            "title":"【没有异常不用填】是否确诊新型冠状肺炎？",
-            "description":"",
-            "minLength":0,
-            "sort":"10",
-            "maxLength":"",
-            "isRequired":0,
-            "imageCount":"",
-            "hasOtherItems":0,
-            "colName":"field010",
-            "value":"",
-            "fieldItems":[
             ]
         }
     ]
